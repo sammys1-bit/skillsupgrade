@@ -1,60 +1,137 @@
 <html>
-<body style="background:#ffb6c1; text-align:center; font-family:Arial; color:white;">
+<body style="margin:0; font-family:Arial; background:#f5f5f5; color:#333; text-align:center;">
 
-<h1>🎁 Little Game for You 🎁</h1>
+<!-- PAGE 1 -->
+<div id="page1" style="margin-top:100px;">
+  <h1 style="font-size:40px;">(>_<) Wait...</h1>
+  
+  <p style="font-size:20px;">
+    Only someone special can open this 💌
+  </p>
 
-<p id="question">(>_<) Ready?</p>
+  <p style="font-size:18px;">
+    What’s your name? (hint: spicy 🌶)
+  </p>
 
-<input id="answer" placeholder="Type answer here" 
-style="padding:8px; border-radius:10px;">
+  <input id="nameInput" placeholder="type here"
+  style="padding:10px; font-size:16px; border-radius:10px;">
 
-<br><br>
+  <br><br>
 
-<button onclick="check()">Submit 💌</button>
+  <button onclick="checkName()"
+  style="padding:10px 20px; font-size:16px; border-radius:20px;">
+    Enter →
+  </button>
 
-<p id="msg"></p>
+  <p id="nameMsg"></p>
+</div>
 
-<p style="font-size:20px;">💖 💕 ✨ 🧸 💞</p>
+<!-- PAGE 2 -->
+<div id="page2" style="display:none; margin-top:80px; padding:20px;">
+
+  <h1 style="font-size:38px;">Hi… finally you’re here (╥﹏╥)</h1>
+
+  <p style="font-size:20px; width:80%; margin:auto;">
+    I didn’t mean to hurt you…  
+    and I know sorry isn’t enough…  
+    but I really mean it.
+  </p>
+
+  <br>
+
+  <p style="font-size:18px;">
+    Before you continue… answer this 🥺
+  </p>
+
+  <p style="font-size:18px;">
+    What does your favorite person call you?
+  </p>
+
+  <input id="q2" placeholder="your answer"
+  style="padding:10px; font-size:16px; border-radius:10px;">
+
+  <br><br>
+
+  <button onclick="checkQ2()"
+  style="padding:10px 20px; border-radius:20px;">
+    Continue →
+  </button>
+
+  <p id="q2msg"></p>
+
+</div>
+
+<!-- FINAL PAGE -->
+<div id="final" style="display:none; margin-top:80px; padding:20px;">
+
+  <h1 style="font-size:40px;">(╥﹏╥) I’m Really Sorry</h1>
+
+  <p style="font-size:20px; width:80%; margin:auto;">
+    You mean more to me than I show sometimes…  
+    and I hate that I hurt you.  
+    I’d fix it all if I could.
+  </p>
+
+  <br>
+
+  <p style="font-size:22px;">
+    So… can I try again?  
+  </p>
+
+  <button onclick="yesClick()"
+  style="padding:12px 25px; font-size:18px; border-radius:20px;">
+    yes :)
+  </button>
+
+  <button onclick="noClick()" id="noBtn"
+  style="padding:12px 25px; font-size:18px; border-radius:20px;">
+    no :(
+  </button>
+
+  <p id="finalMsg" style="margin-top:20px;"></p>
+
+  <br>
+
+  <p style="font-size:22px;">
+    <3 <3 <3 * * * <3 <3
+  </p>
+
+</div>
 
 <script>
-var step = 0;
-
-var questions = [
-  "2 + 2 = ?",
-  "What color is the sky? (blue)",
-  "Type YES 💖"
-];
-
-var answers = [
-  "4",
-  "blue",
-  "yes"
-];
-
-var gifts = [
-  "🎁 Gift 1: You smiled 😊",
-  "🎁 Gift 2: You’re still here 🥺",
-  "🎁 Final Gift: You gave me another chance 💖😭"
-];
-
-function check() {
-  var input = document.getElementById("answer").value.toLowerCase();
-
-  if (input == answers[step]) {
-    document.getElementById("msg").innerHTML = gifts[step];
-    step++;
-
-    if (step < questions.length) {
-      document.getElementById("question").innerHTML = questions[step];
-      document.getElementById("answer").value = "";
-    } else {
-      document.getElementById("question").innerHTML = "💖 Thank you for playing 💖";
-      document.getElementById("answer").style.display = "none";
-    }
-
+function checkName() {
+  var name = document.getElementById("nameInput").value.toLowerCase().trim();
+  
+  if (name === "jolokia") {
+    document.getElementById("page1").style.display = "none";
+    document.getElementById("page2").style.display = "block";
   } else {
-    document.getElementById("msg").innerHTML = "🥺 try again please...";
+    document.getElementById("nameMsg").innerHTML = "(>_<) nope… try again";
   }
+}
+
+function checkQ2() {
+  var ans = document.getElementById("q2").value.trim();
+  
+  if (ans.length > 0) {
+    document.getElementById("page2").style.display = "none";
+    document.getElementById("final").style.display = "block";
+  } else {
+    document.getElementById("q2msg").innerHTML = "say something 🥺";
+  }
+}
+
+function yesClick() {
+  document.getElementById("finalMsg").innerHTML = 
+  "…thank you 😭 I’ll make it worth it this time <3";
+}
+
+var texts = ["please…", "don’t say no", "I’ll fix it", "one more chance?"];
+var i = 0;
+
+function noClick() {
+  document.getElementById("noBtn").innerHTML = texts[i];
+  i = (i + 1) % texts.length;
 }
 </script>
 
